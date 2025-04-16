@@ -1,5 +1,5 @@
-from model import LinearRegression
 from data import DataFormatter
+from model import LinearRegression
 
 formatter = DataFormatter(csv='./data/data.csv')
 
@@ -12,5 +12,3 @@ model.train(x, y)
 
 # 2. Save model
 model.save_model()
-
-

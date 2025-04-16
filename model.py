@@ -42,6 +42,7 @@ class LinearRegression:
         :param x: The input feature values.
         :param y: The target output values.
         """
+        self.compute_r2(x, y)
         x_len = len(x)
 
         for i in range(self.iterations):

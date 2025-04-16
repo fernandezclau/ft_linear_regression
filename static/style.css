@@ -1,0 +1,206 @@
+body {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10.5pt;
+    font-weight: 350;
+    color: rgb(87, 86, 86);
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px; /* Margen de 20px en los lados */
+    max-width: 1200px; /* Limita el ancho máximo del contenido */
+    margin-left: auto;
+    margin-right: auto; /* Centra el contenido */
+}
+
+/* Title */
+.title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title h1, .title h4 {
+    margin: 10px;
+}
+
+.title h4 {
+    font-weight: lighter;
+}
+
+.title span a {
+    color: #d996a1;
+    font-weight: bold;
+}
+
+/* Predict */
+.predict {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.predict-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 15px;
+    flex-flow: wrap;
+}
+
+.predict-data {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Títulos y etiquetas */
+.predict-data label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin: 16px 0 16px 0;
+    display: block;
+}
+
+/* Campo de entrada de texto */
+.predict-data input[type="text"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo cuando el input recibe foco */
+.predict-data input[type="text"]:focus {
+    border-color: #d996a1;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Botón de submit */
+.predict-data button {
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para el botón cuando se pasa el mouse por encima */
+.predict-data button:hover {
+    background-color: #d996a1;
+}
+
+/* Mensaje de error, si es necesario */
+.predict-data input:invalid {
+    border-color: #d996a1;
+}
+
+.predict-data input:invalid:focus {
+    background-color: #f8d7da;
+}
+
+/* Train */
+.training, .predict {
+    background-color: #fff8f8;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.training  h2{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.training-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 15px;
+    flex-flow: wrap;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    background-color: #e0e3ea;
+    border: 2px solid #fffcfc;
+}
+
+/* Header row */
+.data-table th {
+    background-color: #34495e;
+    color: #fffcfc;
+    font-weight: bold;
+    border: 2px solid #fffcfc;
+}
+
+.data-table td {
+    color: #34495e;
+}
+
+.data-table tr:hover {
+    background-color: #ecf0f1;
+}
+
+.predict {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.metrics-table {
+    width:fit-content;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.data-table th, .data-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+
+#toggle-btn {
+    margin: 0;
+    padding: 8px;
+    background-color: transparent;
+    color: #34495e;
+    border: none;
+    width: 100%;
+}
+
+#toggle-btn:hover {
+    background-color: #e9d2d6;
+    cursor: pointer;
+}
+
+#more-row td {
+    text-align: center;
+    padding: 0;
+}
+
