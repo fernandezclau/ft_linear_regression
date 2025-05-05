@@ -10,6 +10,7 @@ def index():
     Main route to display the form and prediction results.
     Handles both GET (initial page load) and POST (form submission) requests.
     """
+
     # Create an instance of the DataFormatter to load and format data
     formatter = DataFormatter(
         x_title="Mileage (Km)",
@@ -23,7 +24,7 @@ def index():
 
     # Format the data (used for plotting and displaying)
     data = formatter.format_data()
-    print(data)
+
     data['predicted_price'] = None
     if request.method == 'POST':
         try:

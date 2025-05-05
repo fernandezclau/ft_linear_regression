@@ -2,28 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>ft_linear_regression</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 </head>
-    <script>
-        let data = {{ data | tojson | safe }};
-    </script>
-<body>
-    <!-- Title -->
-    <div class="title">
-        <h1>ft_linear_regression</h1>
-        <h4>by <span><a href="https://profile.intra.42.fr/users/claferna" target="_blank">@claferna</a></span></h4>
-    </div>
 
-    <!-- Predecir valor -->
-    <div class="predict">
-        <h2>Predict a value</h2>
-        <div class="predict-container">
-            <form method="POST">
+<!--  LOAD DATA -->
+<script>
+    let data = {{ data | tojson | safe }};
+</script>
+
+<body>
+
+<!-- Title -->
+<div class="title">
+    <h1>ft_linear_regression</h1>
+    <h4>by <span><a href="https://profile.intra.42.fr/users/claferna" target="_blank">@claferna</a></span></h4>
+</div>
+
+<!-- Predict values -->
+<div class="predict">
+    <h2>Predict a value</h2>
+    <div class="predict-container">
+        <form method="POST">
             <div class="predict-data">
                 <label for="x1">Mileage (km):</label>
-                <input type="text" id="x1" name="x1" required>
+                <input id="x1" name="x1" required type="text">
                 <button type="submit">Predict</button>
             </div>
         </form>
@@ -34,91 +38,126 @@
             <p>For <strong>{{ data.input_km }}</strong> km → Estimated price:
                 <strong>
                     {% if data.predicted_price is number %}
-                        ${{ data.predicted_price }}
+                    ${{ data.predicted_price }}
                     {% else %}
-                        {{ data.predicted_price }}
+                    {{ data.predicted_price }}
                     {% endif %}
                 </strong>
             </p>
-            <canvas id="graphic4" width="400" height="300"></canvas>
+            <canvas height="300" id="graphic4" width="400"></canvas>
         </div>
 
+    </div>
+</div>
+
+<!-- Training  -->
+<div class="training">
+    <!-- Training data -->
+    <h2>Data set</h2>
+    <div class="training-data">
+        <div>
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>{{ data.description.x_title }}</th>
+                    <th>{{ data.description.y_title }}</th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                {% for x, y in data.training_data[:6] %}
+                <tr>
+                    <td>{{ x }}</td>
+                    <td>{{ y }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+                <tr id="more-row">
+                    <td colspan="2" style="text-align: center;">
+                        <button id="toggle-btn">View more</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Data representation -->
+        <div>
+            <canvas height="300" id="graphic" width="400"></canvas>
         </div>
     </div>
+</div>
 
-    <!-- Training  -->
-    <div class="training">
-        <!-- Training data -->
-        <h2>Data set</h2>
-        <div class="training-data">
-            <div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>{{ data.description.x_title }}</th>
-                            <th>{{ data.description.y_title }}</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        {% for x, y in data.training_data[:6] %}
-                            <tr>
-                                <td>{{ x }}</td>
-                                <td>{{ y }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                    <!-- Fila para el botón -->
-                    <tr id="more-row">
-                        <td colspan="2" style="text-align: center;">
-                            <button id="toggle-btn">View more</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+<!-- Training  -->
+<div class="training">
+    <!-- Training data -->
+    <h2>Training</h2>
 
-            <!-- Data representation -->
-            <div>
-                <canvas id="graphic" width="400" height="300"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Training  -->
-    <div class="training">
-        <!-- Training data -->
-        <h2>Training</h2>
-        <table class="data-table metrics-table">
-            <thead>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-flow: wrap; overflow: hidden;">
+        <div>
+            <h3>Model parameters</h3>
+            <table class="data-table metrics-table">
+                <thead>
                 <tr>
                     <th>Theta0</th>
-                    <th>theta1</th>
-                    <th>Learning Rate</th>
-                    <th>Iterations</th>
-                    <th>R²</th>
-                    <th>MSE</th>
+                    <th>Theta1</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr>
                     <td>{{ data.regression_line.real_slope }}</td>
                     <td>{{ data.regression_line.real_intercept }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3>Hiperparameters</h3>
+            <table class="data-table metrics-table">
+                <thead>
+                <tr>
+                    <th>Learning Rate</th>
+                    <th>Iterations</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
                     <td>{{ data.metrics.learning_rate }}</td>
                     <td>{{ data.metrics.iterations }}</td>
-                    <td>{{ data.metrics.r2 }}</td>
-                    <td>{{ data.metrics.mse }}</td>
                 </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3 style="width: fit-content;">Errors & Metrics</h3>
+        <table class="data-table metrics-table">
+            <thead>
+            <tr>
+                <th>R²</th>
+                <th>MSE</th>
+                <th>MAE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ data.metrics.r2 }}</td>
+                <td>{{ data.metrics.mse_real }}</td>
+                <td>{{ data.metrics.mae_real }}</td>
+            </tr>
             </tbody>
         </table>
-        <div class="training-data">
-            <!-- Data representation -->
-            <div>
-                <canvas id="graphic2" width="400" height="300"></canvas>
-            </div>
-            <div>
-                <canvas id="graphic3" width="400" height="300"></canvas>
-            </div>
         </div>
     </div>
+
+    <div class="training-data">
+        <!-- Data representation -->
+        <div>
+            <canvas height="300" id="graphic2" width="400"></canvas>
+        </div>
+        <div>
+            <canvas height="300" id="graphic3" width="400"></canvas>
+        </div>
+    </div>
+</div>
 </body>
 
 <script>
@@ -150,7 +189,6 @@
     function showFirstSixRows() {
         tableBody.innerHTML = '';
 
-        // Mostrar solo las primeras 6 filas
         for (let i = 0; i < 7; i++) {
             const newRow = document.createElement('tr');
             const cell1 = document.createElement('td');

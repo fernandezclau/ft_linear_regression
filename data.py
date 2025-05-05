@@ -26,16 +26,34 @@ class DataFormatter:
             "x_title": self.x_title,
             "y_title": self.y_title
         }
-        info["training_data"] = list(zip(self.x_train, self.y_train))  # Convierte los datos a listas
+
+        info["training_data"] = list(zip(self.x_train, self.y_train))
         if df is not None:
+            theta0_scaled = float(df['theta0'].iloc[0])
+            theta1_scaled = float(df['theta1'].iloc[0])
+
+            theta1_original = (theta1_scaled * self.y_std) / self.x_std
+            theta0_original = self.y_mean + self.y_std * (theta0_scaled - (theta1_scaled * self.x_mean / self.x_std))
+
             info["regression_line"] = {
-                "slope": float(df['theta0'].iloc[0]),
-                "intercept": float(df['theta1'].iloc[0])
+                "intercept": theta0_scaled,
+                "slope": theta1_scaled,
+                "real_intercept": theta0_original,
+                "real_slope": theta1_original
             }
+            scaled_mse = float(df['mse'].iloc[0])
+            scaled_mae = float(df['mae'].iloc[0])
+
+            mse_real = scaled_mse * (self.y_std ** 2)
+            mae_real = scaled_mae * self.y_std
+
             info["metrics"] = {
                 "learning_rate": float(df['learning_rate'].iloc[0]),
                 "iterations": float(df['iterations'].iloc[0]),
-                "mse": float(df['mse'].iloc[0]),
+                "mse": scaled_mse,
+                "mse_real": mse_real,
+                "mae": scaled_mae,
+                "mae_real": mae_real,
                 "r2": float(df['r2'].iloc[0])
             }
 
@@ -49,6 +67,15 @@ class DataFormatter:
         }
 
         return info
+
+    def show_data(self):
+        df_train = pd.DataFrame({
+            'X Scaled': self.x_train,
+            'Y Scaled': self.y_train
+        })
+
+        print("\nData:")
+        print(df_train)
 
     def __scale_data(self):
         self.x_mean = np.mean(self.x_train)

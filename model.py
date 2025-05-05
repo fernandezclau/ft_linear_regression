@@ -26,6 +26,7 @@ class LinearRegression:
         self.theta0 = 0.0   # intercept (θ0)
         self.theta1 = 0.0   # slope (θ1)
         self.mse = None     # Mean Squared Error (MSE)
+        self.mae = None     # Mean Absolute Error (MAE)
         self.r2 = None      # R-squared, will be calculated later
 
     def predict(self, x):
@@ -54,21 +55,23 @@ class LinearRegression:
             self.theta1 -= self.learning_rate * sum_errors_x / x_len
 
             if i % (self.iterations // 10) == 0 or i == self.iterations - 1:
-                loss = self.compute_loss(x, y)
-                print(f"Iteración {i}: Loss (MSE) = {loss:.6f}")
+                loss_mse, loss_mae = self.compute_loss(x, y)
+                print(f"Iteration {i}: Loss (MSE) = {loss_mse:.6f}")
+                print(f"               Loss (MAE) = {loss_mae:.6f}")
 
     def compute_loss(self, x, y):
         """
-        Compute the Mean Squared Error (MSE) loss.
+        Compute the Mean Squared Error (MSE) and Mean Absolute Error (MAE).
         :param x: The input feature values.
         :param y: The true target values.
-        :return: The computed MSE.
+        :return: A tuple (MSE, MAE).
         """
         predictions = self.predict(x)
         errors = predictions - y
         self.mse = np.mean(errors ** 2)
+        self.mae = np.mean(np.abs(errors))
 
-        return self.mse
+        return self.mse, self.mae
 
     def compute_r2(self, x, y):
         """
@@ -89,8 +92,8 @@ class LinearRegression:
         """
         with open(self.filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(['theta0', 'theta1', 'learning_rate', 'iterations', 'mse', 'r2'])
-            writer.writerow([self.theta0, self.theta1, self.learning_rate, self.iterations, self.mse, self.r2])
+            writer.writerow(['theta0', 'theta1', 'learning_rate', 'iterations', 'mse', 'mae', 'r2'])
+            writer.writerow([self.theta0, self.theta1, self.learning_rate, self.iterations, self.mse, self.mae, self.r2])
 
     def load_model(self):
         """

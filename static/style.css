@@ -5,10 +5,10 @@ body {
     color: rgb(87, 86, 86);
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px; /* Margen de 20px en los lados */
-    max-width: 1200px; /* Limita el ancho máximo del contenido */
+    padding: 20px;
+    max-width: 1200px;
     margin-left: auto;
-    margin-right: auto; /* Centra el contenido */
+    margin-right: auto;
 }
 
 /* Title */
@@ -53,7 +53,6 @@ body {
     flex-direction: column;
 }
 
-/* Títulos y etiquetas */
 .predict-data label {
     font-size: 16px;
     color: #333;
@@ -62,7 +61,6 @@ body {
     display: block;
 }
 
-/* Campo de entrada de texto */
 .predict-data input[type="text"] {
     padding: 10px;
     margin-bottom: 15px;
@@ -73,14 +71,12 @@ body {
     transition: border-color 0.3s ease;
 }
 
-/* Estilo cuando el input recibe foco */
 .predict-data input[type="text"]:focus {
     border-color: #d996a1;
     outline: none;
     background-color: #fff;
 }
 
-/* Botón de submit */
 .predict-data button {
     background-color: #34495e;
     color: white;
@@ -92,12 +88,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Estilo para el botón cuando se pasa el mouse por encima */
 .predict-data button:hover {
     background-color: #d996a1;
 }
 
-/* Mensaje de error, si es necesario */
 .predict-data input:invalid {
     border-color: #d996a1;
 }
@@ -131,6 +125,7 @@ body {
     flex-flow: wrap;
 }
 
+/* Tables */
 .data-table {
     width: 100%;
     border-collapse: collapse;
@@ -143,7 +138,6 @@ body {
     border: 2px solid #fffcfc;
 }
 
-/* Header row */
 .data-table th {
     background-color: #34495e;
     color: #fffcfc;
@@ -183,7 +177,6 @@ body {
     border: 1px solid #ddd;
     text-align: center;
 }
-
 
 #toggle-btn {
     margin: 0;

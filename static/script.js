@@ -160,8 +160,8 @@ function loadLossGraphic(km, prices, lr_info, scaling) {
 }
 
 function computeLinearRegression(km, lr_info, scaling) {
-    const a_scaled = lr_info.intercept;
-    const b_scaled = lr_info.slope;
+    const a_scaled = lr_info.slope;         // theta 0
+    const b_scaled = lr_info.intercept;     // theta 1
 
     const a_real = (a_scaled * scaling.y_std) / scaling.x_std;
     const b_real = b_scaled * scaling.y_std + scaling.y_mean - a_real * scaling.x_mean;
@@ -171,9 +171,9 @@ function computeLinearRegression(km, lr_info, scaling) {
     const minKm = Math.min(...km);
     const maxKm = Math.max(...km);
     const regressionLine = [
-        {x: minKm, y: a_real * minKm + b_real},
-        {x: maxKm, y: a_real * maxKm + b_real}
-    ]
+        { x: Math.min(0, minKm), y: a_real * Math.min(0, minKm) + b_real },
+        { x: maxKm, y: a_real * maxKm + b_real }
+    ];
 
     return { regressionLine, predictedPrices };
 }
