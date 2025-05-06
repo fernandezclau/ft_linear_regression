@@ -20,7 +20,14 @@ def index():
     )
 
     model = LinearRegression()
-    model.load_model()
+    try:
+        model.load_model()
+    except FileNotFoundError:
+        x = formatter.x_scaled
+        y = formatter.y_scaled
+        model.train(x, y)
+        model.save_model()
+        pass
 
     # Format the data (used for plotting and displaying)
     data = formatter.format_data()

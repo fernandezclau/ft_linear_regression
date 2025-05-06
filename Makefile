@@ -14,7 +14,7 @@ help:
 
 # Create virtual environment
 setup:
-	@python -m venv .venv
+	@python3 -m venv .venv
 	@echo "Virtual environment created. Activate it with:"
 	@echo "source .venv/bin/activate  # On Unix/macOS"
 	@echo ".venv\\Scripts\\activate   # On Windows"
@@ -38,5 +38,11 @@ test:
 
 # Clean project
 clean:
+	@rm -f ./data/parameters.csv
+
+# Fclean project
+fclean:
+	@clean
 	@rm -rf __pycache__ .venv
 	@find . -name "*.pyc" -delete
+
