@@ -42,7 +42,7 @@ clean:
 
 # Fclean project
 fclean:
-	@clean
+	clean
 	@rm -rf __pycache__ .venv
 	@find . -name "*.pyc" -delete
 
