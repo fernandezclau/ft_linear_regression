@@ -43,7 +43,6 @@ class LinearRegression:
         :param x: The input feature values.
         :param y: The target output values.
         """
-        self.compute_r2(x, y)
         x_len = len(x)
 
         for i in range(self.iterations):
@@ -58,6 +57,8 @@ class LinearRegression:
                 loss_mse, loss_mae = self.compute_loss(x, y)
                 print(f"Iteration {i}: Loss (MSE) = {loss_mse:.6f}")
                 print(f"               Loss (MAE) = {loss_mae:.6f}")
+
+        self.compute_r2(x, y)
 
     def compute_loss(self, x, y):
         """

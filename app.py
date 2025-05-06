@@ -31,6 +31,9 @@ def index():
             # Get the input mileage
             x1 = float(request.form['x1'])
 
+            if x1 < 0:
+                raise ValueError
+
             x1_scaled = formatter.normalize_input(x1)
             predicted_price_scaled = model.predict([x1_scaled])[0]
             predicted_price = formatter.denormalize_output(predicted_price_scaled)
