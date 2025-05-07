@@ -1,6 +1,6 @@
 # Makefile for ft_linear_regression
 
-.PHONY: help setup install train run test clean
+.PHONY: help setup install unistall train run test clean
 
 # Default help message
 help:
@@ -21,20 +21,24 @@ setup:
 
 # Install dependencies
 install:
-	@.venv/bin/pip install --upgrade pip
-	@.venv/bin/pip install -r requirements.txt
+	pip install --upgrade pip
+	pip install -r requirements.txt
+
+# Uninstall dependencies
+unistall:
+	pip freeze --user | xargs pip uninstall -y
 
 # Train the model
 train:
-	@.venv/bin/python train.py
+	python3 train.py
 
 # Run the web app
 run:
-	@.venv/bin/python app.py
+	python3 app.py
 
 # Run tests
 test:
-	@.venv/bin/python test.py
+	python3 test.py
 
 # Clean project
 clean:
@@ -42,7 +46,7 @@ clean:
 
 # Fclean project
 fclean:
-	clean
-	@rm -rf __pycache__ .venv
+	$(MAKE) clean
+	@rm -rf __pycache__
 	@find . -name "*.pyc" -delete
 
