@@ -1,6 +1,6 @@
 # Makefile for ft_linear_regression
 
-.PHONY: help setup install unistall train run test clean
+.PHONY: help setup install uninstall train run test clean
 
 # Default help message
 help:
@@ -25,7 +25,7 @@ install:
 	pip install --user -r requirements.txt
 
 # Uninstall dependencies
-unistall:
+uninstall:
 	pip freeze --user | xargs pip uninstall -y
 
 # Train the model
