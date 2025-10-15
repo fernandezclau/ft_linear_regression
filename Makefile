@@ -49,5 +49,6 @@ clean:
 fclean:
 	$(MAKE) clean
 	@rm -rf __pycache__
+	@rm -rf .venv
 	@find . -name "*.pyc" -delete
 
