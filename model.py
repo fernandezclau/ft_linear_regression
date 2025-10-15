@@ -56,7 +56,7 @@ class LinearRegression:
             if i % (self.iterations // 10) == 0 or i == self.iterations - 1:
                 loss_mse, loss_mae = self.compute_loss(x, y)
                 print(f"Iteration {i}: Loss (MSE) = {loss_mse:.6f}")
-                print(f"               Loss (MAE) = {loss_mae:.6f}")
+                #print(f"               Loss (MAE) = {loss_mae:.6f}")
 
         self.compute_r2(x, y)
 

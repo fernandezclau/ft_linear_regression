@@ -44,8 +44,8 @@ class DataFormatter:
             scaled_mse = float(df['mse'].iloc[0])
             scaled_mae = float(df['mae'].iloc[0])
 
-            mse_real = scaled_mse * (self.y_std ** 2)
-            mae_real = scaled_mae * self.y_std
+            mse_real = self.denormalize_output(scaled_mse)
+            mae_real = self.denormalize_output(scaled_mae)
 
             info["metrics"] = {
                 "learning_rate": float(df['learning_rate'].iloc[0]),
