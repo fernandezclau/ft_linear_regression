@@ -1,6 +1,6 @@
 # Makefile for ft_linear_regression
 
-.PHONY: help setup install train run test clean
+.PHONY: help setup install train run test clean fclean
 
 # Default help message
 help:
@@ -10,7 +10,8 @@ help:
 	@echo "  make train     Train the linear regression model"
 	@echo "  make run       Run the Flask web application"
 	@echo "  make test      Run basic tests"
-	@echo "  make clean     Remove virtual environment and __pycache__"
+	@echo "  make clean     Remove the trained model parameters"
+	@echo "  make fclean    Run clean and remove virtual environment and __pycache__"
 
 # Create virtual environment
 setup:
@@ -41,8 +42,7 @@ clean:
 	@rm -f ./data/parameters.csv
 
 # Fclean project
-fclean:
-	clean
+fclean: clean
 	@rm -rf __pycache__ .venv
 	@find . -name "*.pyc" -delete
 

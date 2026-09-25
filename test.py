@@ -46,7 +46,7 @@ print(f"MSE my model: {mse_my_model:.6f}")
 print(f"MAE my model: {mae_my_model:.6f}")
 print(f"R² my model: {r2_my_model:.6f}")
 print(f"MSE sklearn: {mse_sklearn:.6f}")
-print(f"MAE sklearn: {mae_sklearn}:.6f")
+print(f"MAE sklearn: {mae_sklearn:.6f}")
 print(f"R² sklearn: {r2_sklearn:.6f}")
 
 # ---- 3. COMPARE REAL VALUES ---
